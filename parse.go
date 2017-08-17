@@ -1,8 +1,8 @@
 package main
 
 import (
-	"strings"
 	"errors"
+	"strings"
 )
 
 const INDEX = "INDEX"
@@ -33,9 +33,9 @@ func parse(input string) (*pkg, error) {
 
 	// return the resulting request object
 	response := pkg{
-		Command: requestParts[0],
-		Name: requestParts[1],
-		Dependencies: dependencies,
+		Command:       requestParts[0],
+		Name:          requestParts[1],
+		Dependencies:  dependencies,
 		DependantPkgs: []*pkg{},
 	}
 

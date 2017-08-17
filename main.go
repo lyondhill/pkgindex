@@ -2,13 +2,13 @@ package main
 
 import (
 	"flag"
-	"net"
 	"fmt"
+	"net"
 )
 
 func main() {
 	port := flag.Int("port", 8080, "port to listen on (default 8080)")
-	flag.Parse()	// initiate the server
+	flag.Parse() // initiate the server
 
 	startServer(*port)
 }
@@ -27,5 +27,5 @@ func startServer(port int) {
 
 		go handleConn(conn)
 	}
-	
+
 }

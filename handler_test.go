@@ -1,9 +1,9 @@
 package main
 
 import (
-	"testing"
-	"net"
 	"fmt"
+	"net"
+	"testing"
 )
 
 func TestHandlerConn(t *testing.T) {
@@ -14,7 +14,7 @@ func TestHandlerConn(t *testing.T) {
 		[]string{"QUERY|my|", "OK"},
 		[]string{"QUERY|this should fail", "ERROR"},
 		[]string{"INDEX|a|bad,dep", "FAIL"},
-		[]string{"REMOVE|my|", "OK"},	
+		[]string{"REMOVE|my|", "OK"},
 	}
 
 	client, server := net.Pipe()

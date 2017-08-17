@@ -1,8 +1,8 @@
 package main
 
 import (
-	"sync"
 	"errors"
+	"sync"
 )
 
 var (
@@ -13,9 +13,9 @@ var (
 	indexedPkgs = map[string]*pkg{}
 
 	// fail to index because its dependencies arent indexed
-	missingPackage = errors.New("missing package")
+	missingPackage      = errors.New("missing package")
 	missingDependencies = errors.New("missing dependencies")
-	isDependant = errors.New("other package depend on me")
+	isDependant         = errors.New("other package depend on me")
 )
 
 // add a pkg to the index
@@ -83,10 +83,10 @@ func updateDependents(existingPkg, newPkg *pkg) error {
 		for _, pkg := range newPkg.Dependencies {
 			newDependant, ok := indexRead(pkg)
 			if ok {
-				newDependant.addDependant(newPkg)	
+				newDependant.addDependant(newPkg)
 			}
 		}
-		return nil		
+		return nil
 	}
 
 	// if there is no new package we can just remove ourself from the existing dependencies
@@ -94,10 +94,10 @@ func updateDependents(existingPkg, newPkg *pkg) error {
 		for _, pkg := range existingPkg.Dependencies {
 			oldDependant, ok := indexRead(pkg)
 			if ok {
-				oldDependant.removeDependant(existingPkg)	
+				oldDependant.removeDependant(existingPkg)
 			}
 		}
-		return nil		
+		return nil
 	}
 
 	// we dont want to do this concurrently
@@ -108,7 +108,7 @@ func updateDependents(existingPkg, newPkg *pkg) error {
 	for _, pkg := range minus(existingPkg.Dependencies, newPkg.Dependencies) {
 		oldDependant, ok := indexRead(pkg)
 		if ok {
-			oldDependant.removeDependant(existingPkg)	
+			oldDependant.removeDependant(existingPkg)
 		}
 	}
 
@@ -116,7 +116,7 @@ func updateDependents(existingPkg, newPkg *pkg) error {
 	for _, pkg := range minus(newPkg.Dependencies, existingPkg.Dependencies) {
 		newDependant, ok := indexRead(pkg)
 		if ok {
-			newDependant.addDependant(existingPkg)	
+			newDependant.addDependant(existingPkg)
 		}
 	}
 

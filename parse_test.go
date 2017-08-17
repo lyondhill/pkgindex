@@ -4,13 +4,11 @@ import (
 	"testing"
 )
 
-
-
 func TestParse(t *testing.T) {
 	validTests := map[string]pkg{
-		"INDEX|good|data":pkg{Command:"INDEX", Name:"good", Dependencies: []string{"data"}},
-		"REMOVE|valid|": pkg{Command:"REMOVE", Name:"valid", Dependencies: []string{}},
-		"QUERY|good|more,parts,exist": pkg{Command:"QUERY", Name: "good", Dependencies: []string{"more", "parts", "exist"}},
+		"INDEX|good|data":             pkg{Command: "INDEX", Name: "good", Dependencies: []string{"data"}},
+		"REMOVE|valid|":               pkg{Command: "REMOVE", Name: "valid", Dependencies: []string{}},
+		"QUERY|good|more,parts,exist": pkg{Command: "QUERY", Name: "good", Dependencies: []string{"more", "parts", "exist"}},
 	}
 	for input, request := range validTests {
 		returnedRequest, err := parse(input)
@@ -59,7 +57,6 @@ func TestParse(t *testing.T) {
 			}
 		}
 
-
 	}
 
 	invalidTests := []string{
@@ -74,7 +71,7 @@ func TestParse(t *testing.T) {
 		}
 
 	}
-	
+
 }
 
 func TestValidCommands(t *testing.T) {
@@ -93,5 +90,3 @@ func TestValidCommands(t *testing.T) {
 	}
 
 }
-
-

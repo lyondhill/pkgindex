@@ -101,7 +101,7 @@ func TestQuery(t *testing.T) {
 }
 
 func TestMinus(t *testing.T) {
-	if fmt.Sprintf("%v", minus([]string{"hi", "dude", "or", "old", "friend"}, []string{"dude", "or"})) != "[hi old friend]"  {
+	if fmt.Sprintf("%v", minus([]string{"hi", "dude", "or", "old", "friend"}, []string{"dude", "or"})) != "[hi old friend]" {
 		t.Fatal("failed to subtract elements from both arrays")
 	}
 	if fmt.Sprintf("%v", minus([]string{"one"}, []string{"two"})) != "[one]" {

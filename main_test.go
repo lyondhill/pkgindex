@@ -1,9 +1,9 @@
 package main
 
-import(
-	"testing"
-	"net"
+import (
 	"fmt"
+	"net"
+	"testing"
 )
 
 func TestStartServer(t *testing.T) {

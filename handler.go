@@ -1,9 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"io"
-	"bufio"
 )
 
 type handleFunc func(*pkg) error
@@ -12,11 +12,10 @@ var handlers = map[string]handleFunc{}
 
 // setup the handlers so it is more expandable
 func init() {
-	handlers["INDEX"] = index	
-	handlers["QUERY"] = query	
-	handlers["REMOVE"] = remove	
+	handlers["INDEX"] = index
+	handlers["QUERY"] = query
+	handlers["REMOVE"] = remove
 }
-
 
 func handleConn(conn io.ReadWriteCloser) {
 	defer conn.Close()
@@ -47,4 +46,3 @@ func handleRequest(request string) string {
 
 	return "OK"
 }
-
