@@ -13,6 +13,8 @@ var validCommands = [3]string{"INDEX", "REMOVE", "QUERY"}
 // error definition of all error request
 var invalidRequest = errors.New("invalid request")
 
+// parse is used to parse the data from the inbound connections and 
+// builds a pkg object.
 func parse(input string) (*pkg, error) {
 	// clean any newlines that may be present
 	input = strings.Replace(input, "\n", "", -1)
@@ -47,7 +49,7 @@ func parse(input string) (*pkg, error) {
 	return &response, nil
 }
 
-// Ensure that the command given is valid
+// validCommand ensures that the command given is valid
 func validCommand(command string) bool {
 	for _, validCommand := range validCommands {
 		if command == validCommand {

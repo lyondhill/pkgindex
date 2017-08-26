@@ -17,6 +17,7 @@ func init() {
 	handlers["REMOVE"] = remove
 }
 
+// handleConn handles connections as they come in
 func handleConn(conn io.ReadWriteCloser) {
 	defer conn.Close()
 	scanner := bufio.NewScanner(conn)
@@ -27,6 +28,7 @@ func handleConn(conn io.ReadWriteCloser) {
 
 }
 
+// takes a request string and responds with the result from the pkg system
 func handleRequest(request string) string {
 	// parse the request
 	pkg, err := parse(request)

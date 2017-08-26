@@ -18,7 +18,7 @@ var (
 	isDependant         = errors.New("other package depend on me")
 )
 
-// add a pkg to the index
+// index adds a pkg to the index
 func index(pkg *pkg) error {
 
 	// ensure dependencies are indexed
@@ -64,7 +64,7 @@ func remove(pkg *pkg) error {
 	return nil
 }
 
-// check to see if a pkg is in the index
+// query checks to see if a pkg is in the index
 func query(pkg *pkg) error {
 	// check the indexed packages to see if this new pkg exists
 	pkg, ok := indexRead(pkg.Name)
@@ -75,7 +75,7 @@ func query(pkg *pkg) error {
 	return nil
 }
 
-// just update the pkgs that this one depends on
+// updateDependents just update the pkgs that this one depends on
 func updateDependents(existingPkg, newPkg *pkg) error {
 
 	// if there is no existing pkg we will just add newpkg to the dependant list
@@ -126,6 +126,7 @@ func updateDependents(existingPkg, newPkg *pkg) error {
 	return nil
 }
 
+// indexRead is used to read the index and uses the read locker
 func indexRead(key string) (*pkg, bool) {
 	locker.RLock()
 	defer locker.RUnlock()
@@ -134,6 +135,7 @@ func indexRead(key string) (*pkg, bool) {
 	return p, ok
 }
 
+// indexWrite is used to write to the index using the right locker
 func indexWrite(key string, p *pkg) {
 	locker.Lock()
 	defer locker.Unlock()
@@ -141,6 +143,7 @@ func indexWrite(key string, p *pkg) {
 	indexedPkgs[key] = p
 }
 
+// minus returns a subslice of slice1 minus slice2
 func minus(slice1, slice2 []string) []string {
 	rtn := []string{}
 	for _, elem1 := range slice1 {
